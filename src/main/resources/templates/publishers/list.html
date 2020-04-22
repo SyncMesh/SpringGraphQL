@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Framework SyncMesh</title>
+</head>
+<body>
+<h1>Publisher List</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Address Line</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip</th>
+    </tr>
+    <tr th:each="publisher : ${publishers}">
+        <td th:text="${publisher.name}"></td>
+        <td th:text="${publisher.addressLine1}"></td>
+        <td th:text="${publisher.city}"></td>
+        <td th:text="${publisher.state}"></td>
+        <td th:text="${publisher.zip}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

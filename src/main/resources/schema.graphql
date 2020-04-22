@@ -1,0 +1,39 @@
+schema{
+    query: Query
+}
+
+type Query{
+    allBooks: [Book]
+    book(id: String): Book
+
+    allPublishers: [Publisher]
+    publisher(id: String): Publisher
+
+    allAuthors: [Author]
+    author(id: String): Author
+}
+
+type Book{
+    id: String
+    title: String
+    isbn: String
+    publisher: Publisher
+    authors: [Author]
+}
+
+type Publisher{
+    id: String
+    name: String
+    addressLine1: String
+    city: String
+    state: String
+    zip: String
+    books: [Book]
+}
+
+type Author{
+    id: String
+    firstName: String
+    lastName: String
+    books: [Book]
+}
