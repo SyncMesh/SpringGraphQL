@@ -29,6 +29,7 @@ public class NewBookDataFetcher implements DataFetcher<Publisher<Book>> {
             }, 0, 2, TimeUnit.SECONDS);
         });
 
+
         ConnectableObservable connect = observable.share().publish();
         connect.connect();
         return connect.toFlowable(BackpressureStrategy.BUFFER);
