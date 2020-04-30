@@ -1,4 +1,4 @@
-package syncmesh.springframework.spring_graphql.service.datafetcher;
+package syncmesh.springframework.spring_graphql.service.datafetcher_query;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
@@ -7,16 +7,15 @@ import org.springframework.stereotype.Component;
 import syncmesh.springframework.spring_graphql.models.Publisher;
 import syncmesh.springframework.spring_graphql.repositories.PublisherRepository;
 
-import java.util.List;
-
 @Component
-public class AllPublishersDataFetcher implements DataFetcher<List<Publisher>> {
+public class PublisherDataFetcher implements DataFetcher<Publisher> {
 
     @Autowired
     PublisherRepository publisherRepository;
 
     @Override
-    public List<Publisher> get(DataFetchingEnvironment dataFetchingEnvironment) {
-        return publisherRepository.findAll();
+    public Publisher get(DataFetchingEnvironment dataFetchingEnvironment) {
+        String id = dataFetchingEnvironment.getArgument("id");
+        return publisherRepository.getOne(id);
     }
 }

@@ -2,17 +2,18 @@ package syncmesh.springframework.spring_graphql.service;
 
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
-import graphql.schema.idl.RuntimeWiring;
-import graphql.schema.idl.SchemaGenerator;
-import graphql.schema.idl.SchemaParser;
-import graphql.schema.idl.TypeDefinitionRegistry;
+import graphql.schema.idl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import syncmesh.springframework.spring_graphql.models.*;
 import syncmesh.springframework.spring_graphql.repositories.*;
-import syncmesh.springframework.spring_graphql.service.datafetcher.*;
+import syncmesh.springframework.spring_graphql.service.datafetcher_mutation.DeleteBookDataFetcher;
+import syncmesh.springframework.spring_graphql.service.datafetcher_mutation.UpdateBookDataFetcher;
+import syncmesh.springframework.spring_graphql.service.datafetcher_query.*;
+import syncmesh.springframework.spring_graphql.service.datafetcher_mutation.CreateBookDataFetcher;
+import syncmesh.springframework.spring_graphql.service.datafetcher_subscribe.NewBookDataFetcher;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -45,6 +46,17 @@ public class GraphQLService {
     private AuthorDataFetcher authorDataFetcher;
     @Autowired
     private AllAuthorsDataFetcher allAuthorsDataFetcher;
+
+    @Autowired
+    private CreateBookDataFetcher createBookDataFetcher;
+    @Autowired
+    private UpdateBookDataFetcher updateBookDataFetcher;
+    @Autowired
+    private DeleteBookDataFetcher deleteBookDataFetcher;
+
+    @Autowired
+    private NewBookDataFetcher newBookDataFetcher;
+
 
     //load schema at application start up
     @PostConstruct
@@ -96,6 +108,13 @@ public class GraphQLService {
                             .dataFetcher("author", authorDataFetcher)
                             .dataFetcher("allAuthors", allAuthorsDataFetcher)
                 )
+                .type("Mutation", typeWiring -> typeWiring
+                            .dataFetcher("createBook", createBookDataFetcher)
+                            .dataFetcher("updateBook", updateBookDataFetcher)
+                            .dataFetcher("deleteBook", deleteBookDataFetcher)
+                )
+                .type("Subscription", typeWiring -> typeWiring
+                            .dataFetcher("newBook", newBookDataFetcher))
                 .build();
 
     }
@@ -103,4 +122,6 @@ public class GraphQLService {
     public GraphQL getGraphQL(){
         return graphQL;
     }
+
+
 }

@@ -1,4 +1,4 @@
-package syncmesh.springframework.spring_graphql.service.datafetcher;
+package syncmesh.springframework.spring_graphql.service.datafetcher_query;
 
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;

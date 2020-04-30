@@ -1,5 +1,7 @@
 schema{
     query: Query
+    mutation: Mutation
+    subscription: Subscription
 }
 
 type Query{
@@ -12,6 +14,17 @@ type Query{
     allAuthors: [Author]
     author(id: String): Author
 }
+
+type Mutation{
+    createBook(id: String, title: String, isbn: String): Book
+    updateBook(id: String, title: String, isbn: String): Book
+    deleteBook(id: String): Book
+}
+
+type Subscription{
+    newBook(id: String): Book
+}
+
 
 type Book{
     id: String
