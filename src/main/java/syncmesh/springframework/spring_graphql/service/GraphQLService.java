@@ -9,11 +9,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import syncmesh.springframework.spring_graphql.models.*;
 import syncmesh.springframework.spring_graphql.repositories.*;
-import syncmesh.springframework.spring_graphql.service.datafetcher_mutation.DeleteBookDataFetcher;
-import syncmesh.springframework.spring_graphql.service.datafetcher_mutation.UpdateBookDataFetcher;
+import syncmesh.springframework.spring_graphql.service.datafetcher_mutation.*;
 import syncmesh.springframework.spring_graphql.service.datafetcher_query.*;
-import syncmesh.springframework.spring_graphql.service.datafetcher_mutation.CreateBookDataFetcher;
-import syncmesh.springframework.spring_graphql.service.datafetcher_subscribe.NewBookDataFetcher;
+import syncmesh.springframework.spring_graphql.service.datafetcher_subscribe.BooksDataFetcher;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -53,9 +51,21 @@ public class GraphQLService {
     private UpdateBookDataFetcher updateBookDataFetcher;
     @Autowired
     private DeleteBookDataFetcher deleteBookDataFetcher;
+    @Autowired
+    private CreateAuthorDataFetcher createAuthorDataFetcher;
+    @Autowired
+    private UpdateAuthorDataFetcher updateAuthorDataFetcher;
+    @Autowired
+    private DeleteAuthorDataFetcher deleteAuthorDataFetcher;
+    @Autowired
+    private CreatePublisherDataFetcher createPublisherDataFetcher;
+    @Autowired
+    private UpdatePublisherDataFetcher updatePublisherDataFetcher;
+    @Autowired
+    private DeletePublisherDataFetcher deletePublisherDataFetcher;
 
     @Autowired
-    private NewBookDataFetcher newBookDataFetcher;
+    private BooksDataFetcher booksDataFetcher;
 
 
     //load schema at application start up
@@ -112,9 +122,17 @@ public class GraphQLService {
                             .dataFetcher("createBook", createBookDataFetcher)
                             .dataFetcher("updateBook", updateBookDataFetcher)
                             .dataFetcher("deleteBook", deleteBookDataFetcher)
+                            .dataFetcher("createAuthor", createAuthorDataFetcher)
+                            .dataFetcher("updateAuthor", updateAuthorDataFetcher)
+                            .dataFetcher("deleteAuthor", deleteAuthorDataFetcher)
+                            .dataFetcher("createPublisher", createPublisherDataFetcher)
+                            .dataFetcher("updatePublisher", updatePublisherDataFetcher)
+                            .dataFetcher("deletePublisher", deletePublisherDataFetcher)
+
                 )
                 .type("Subscription", typeWiring -> typeWiring
-                            .dataFetcher("newBook", newBookDataFetcher))
+                            .dataFetcher("books", booksDataFetcher))
+
                 .build();
 
     }

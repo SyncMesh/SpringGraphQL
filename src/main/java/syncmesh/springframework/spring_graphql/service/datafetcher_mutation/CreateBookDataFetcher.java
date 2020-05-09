@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import syncmesh.springframework.spring_graphql.models.Book;
 import syncmesh.springframework.spring_graphql.repositories.BookRepository;
 
-
 @Component
 public class CreateBookDataFetcher implements DataFetcher<Book> {
 

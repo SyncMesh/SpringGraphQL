@@ -7,6 +7,7 @@ import syncmesh.springframework.spring_graphql.repositories.AuthorRepository;
 
 @Controller
 public class AuthorController {
+
     private final AuthorRepository authorRepository;
 
     public AuthorController(AuthorRepository authorRepository) {

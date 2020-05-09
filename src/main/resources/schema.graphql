@@ -19,10 +19,19 @@ type Mutation{
     createBook(id: String, title: String, isbn: String): Book
     updateBook(id: String, title: String, isbn: String): Book
     deleteBook(id: String): Book
+
+    createAuthor(id: String, firstName: String, lastName: String): Author
+    updateAuthor(id: String, firstName: String, lastName: String): Author
+    deleteAuthor(id: String): Author
+
+    createPublisher(id: String, name: String, city: String, state: String): Publisher
+    updatePublisher(id: String, name: String, city: String, state: String): Publisher
+    deletePublisher(id: String): Publisher
+
 }
 
 type Subscription{
-    newBook(id: String): Book
+    books(id: String): Book
 }
 
 
